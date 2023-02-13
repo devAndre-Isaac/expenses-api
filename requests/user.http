@@ -1,0 +1,40 @@
+@Host = localhost:3000
+
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzYyNTMxOTcsImV4cCI6MTY3NjMzOTU5Nywic3ViIjoiYmViZjY1MjEtOWNiMy00OTQ3LThkNDctODUyNmMwY2Q0N2I0In0.I_UxAJc4OyanE9a4B6TB1aNTs-QRIc2BMzo6EXEpysw
+//Create User
+POST /users HTTP/1.1
+Content-Type: application/json
+Host: {{Host}}
+
+{
+	"email": "email@email.com",
+	"name": "Nome",
+	"password":"12345",
+	"cpf":"123122231",
+	"telephoneNumber":"31999999999"
+}
+
+//Verify user by Id and your respective expenses
+###
+GET /users/f88c1641-947a-416d-8e23-93b204702baf HTTP/1.1
+Content-Type: application/json
+authorization: Bearer {{token}}
+Host: {{Host}}
+
+//Login with your credentials, and get the token
+###
+POST /users/auth HTTP/1.1
+Content-Type: application/json
+Host: {{Host}}
+
+{
+	"email": "email@email.com",
+	"password":"12345"
+}
+
+//Get all users
+###
+GET /users/ HTTP/1.1
+Content-Type: application/json
+authorization: Bearer {{token}}
+Host: {{Host}}
