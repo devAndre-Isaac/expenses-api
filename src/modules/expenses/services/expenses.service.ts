@@ -63,14 +63,23 @@ export class ExpensesService {
     if (!expense) {
       throw new NotFoundException('Not found this expense');
     }
-
     return await this.expensesRepository.save({
       ...expense,
       ...updateExpenseDto,
-    } as any);
+      value: numberFormat(updateExpenseDto.value),
+    });
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} expense`;
+  async remove(id: string) {
+    const expense = await this.expensesRepository.findOne({
+      where: {
+        id: id,
+      },
+      relations: ['user'],
+    });
+    if (!expense) {
+      throw new NotFoundException('Not found this expense');
+    }
+    await this.expensesRepository.remove(expense);
   }
 }
