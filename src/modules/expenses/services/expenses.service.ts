@@ -25,9 +25,11 @@ export class ExpensesService {
     const formatValue = numberFormat(createExpenseDto.value);
 
     const expense = this.expensesRepository.create({
-      ...createExpenseDto,
+      date: createExpenseDto.date,
+      description: createExpenseDto.description,
+      user: createExpenseDto.userId,
       value: formatValue,
-    });
+    } as any);
 
     await this.expensesRepository.save(expense);
 
