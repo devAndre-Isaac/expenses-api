@@ -1,4 +1,4 @@
-import { Expenses } from 'src/modules/expenses/entities/expense.entity';
+import { Expenses } from '../../../modules/expenses/entities/expense.entity';
 import {
   BeforeInsert,
   Column,
@@ -13,10 +13,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Entity('users')
 export class User {
-  @OneToMany((type) => Expenses, (despesa) => despesa.user)
-  @JoinColumn()
-  expenses: Expenses[];
-
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -34,6 +30,10 @@ export class User {
 
   @Column()
   telephoneNumber: string;
+
+  @OneToMany((type) => Expenses, (expenses) => expenses.user)
+  @JoinColumn()
+  expenses: Expenses[];
 
   @CreateDateColumn()
   created_at: Date;
