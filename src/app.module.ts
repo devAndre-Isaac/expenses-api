@@ -4,7 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import AuthMiddleware from './config/middlewares/auth.middleraware';
 import { UsersModule } from './modules/users/users.module';
-import { dbEnv } from './config/database/config';
+import { dbEnv } from './system/database/config';
 import { ExpensesModule } from './modules/expenses/expenses.module';
 
 @Module({
