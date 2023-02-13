@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/modules/users/entities/user.entity';
-import { numberFormat } from 'src/utils/formatter';
+import { User } from '../../../modules/users/entities/user.entity';
+import { numberFormat } from '../../../utils/formatter';
 import { getRepository, Repository } from 'typeorm';
 import { CreateExpenseDto } from '../dto/create-expense.dto';
 import { UpdateExpenseDto } from '../dto/update-expense.dto';
@@ -15,13 +15,15 @@ export class ExpensesService {
   ) {}
 
   async create(createExpenseDto: CreateExpenseDto) {
-    const user = await getRepository(User).findOne({
+    const usersRepository = getRepository(User);
+    const user = await usersRepository.findOne({
       where: { id: createExpenseDto.userId },
     });
     if (!user) {
       throw new NotFoundException('User not found');
     }
     const formatValue = numberFormat(createExpenseDto.value);
+
     const expense = this.expensesRepository.create({
       ...createExpenseDto,
       value: formatValue,
@@ -37,16 +39,16 @@ export class ExpensesService {
   }
 
   async findOne(id: string) {
-    const user = await this.expensesRepository.findOne({
+    const expense = await this.expensesRepository.findOne({
       where: {
         id: id,
       },
       relations: ['user'],
     });
-    if (!user) {
-      throw new NotFoundException('User not found');
+    if (!expense) {
+      throw new NotFoundException('Expense not found');
     }
-    return user;
+    return expense;
   }
 
   async update(id: string, updateExpenseDto: UpdateExpenseDto) {

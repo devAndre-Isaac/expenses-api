@@ -8,7 +8,7 @@ import {
   Min,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsFuture } from 'src/utils/decorators';
+import { IsFuture } from '../../../utils/decorators';
 
 export class CreateExpenseDto {
   @ApiProperty({
