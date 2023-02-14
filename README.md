@@ -1,9 +1,9 @@
 <h1>Informações</h1>
-<h3>Inicie o Banco de dados Postgres utilzando o docker-compose up após de preencher as váriaveis de ambiente</h3>
-<h3>Insira o comando npm run m:run para rodar a migration</h3>
-<h3>Inicie o projeto com npm run start:dev</h3>
-<h3>Vizualize os endpoints através de http://localhost:3000/api</h3>
-<h3>Foi disponibilizado as requisições no projeto, basta instalar a extensão REST Client</h3>
+<p>Após preencher as váriaveis de ambiente, inicie o Banco de dados Postgres utilzando o docker-compose up</p>
+<p>Insira o comando npm run m:run para rodar a migration</p>
+<p>Inicie o projeto com npm run start:dev</p>
+<p>Vizualize os endpoints através de http://localhost:3000/api</p>
+<p>Foi disponibilizado as requisições no projeto, basta instalar a extensão REST Client</p>
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
