@@ -6,6 +6,7 @@ import { getRepository, Repository } from 'typeorm';
 import { CreateExpenseDto } from '../dto/create-expense.dto';
 import { UpdateExpenseDto } from '../dto/update-expense.dto';
 import { Expenses } from '../entities/expense.entity';
+import { mail } from '../../../config/mail/EtherealMail';
 
 @Injectable()
 export class ExpensesService {
@@ -32,8 +33,18 @@ export class ExpensesService {
     } as any);
 
     await this.expensesRepository.save(expense);
-
-    return expense;
+    try {
+      await mail.send({
+        to: user.email,
+        from: '',
+        description: createExpenseDto.description,
+        value: formatValue,
+        userName: user.name,
+      });
+      return { ...expense, sendMail: true };
+    } catch (err) {
+      return { ...expense, sendMail: false, errMessage: err.message };
+    }
   }
 
   async findAll() {
